@@ -11,6 +11,8 @@ if test -z $1 || test $1 = "-h" || test $1 = "-help" ; then
     　　　　output : compiles paper.tex and shows pdf made"
 else
     platex ${1}.tex
+    pbibtex ${1}
+    platex ${1}.tex
     dvipdfmx ${1}.dvi
     echo "Show PDF? [y/n]"
 
