@@ -6,9 +6,24 @@
 
 if test -z $1 || test $1 = "-h" || test $1 = "-help" ; then
 	    echo "options: '-h','-help'
-   　　　 　output : shows help
- 　　　　'paper'.tex
-    　　　　output : compiles paper.tex and shows pdf made"
+   　　　　output : shows help
+         '-y' 'texfile'
+           output : compiles texfile.tex and shows pdf made
+         '-n' 'texfile'
+           output : compiles texfile.tex and doesn't show pdf made
+ 　　　　'texfile'
+    　　　 output : compiles texfile.tex and askes whether to show the pdf made"
+elif test $1 = "-y" ; then
+    platex ${2}.tex
+    pbibtex ${2}
+    platex ${2}.tex
+    dvipdfmx ${2}.dvi
+    open -a Preview "${2}.pdf"
+elif test $1 = "-n" ; then
+    platex ${2}.tex
+    pbibtex ${2}
+    platex ${2}.tex
+    dvipdfmx ${2}.dvi
 else
     platex ${1}.tex
     pbibtex ${1}
